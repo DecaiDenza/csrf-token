@@ -1,0 +1,19 @@
+{
+    "name": "codeflow/csrf-token",
+    "description": "Pacote para usar token CSRF.",
+    "type": "library",
+    "license": "Apache License 2.0",
+    "autoload": {
+        "psr-4": {
+            "Codeflow\\CsrfToken\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lucas Santos",
+            "email": "ls1861464@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
