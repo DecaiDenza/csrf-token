@@ -27,7 +27,7 @@ class CSRF
         }
 
         // Generate token
-        $this->token = bin2hex(random_bytes(32));
+        $this->token = bin2hex(random_bytes(24));
         $this->setTokenInSession(); // Set token in session
     }
 
