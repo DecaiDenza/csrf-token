@@ -19,11 +19,18 @@ class CSRF
      */
     private ?string $token = null;
 
-    public function generateToken(): void
+    /**
+     * Method to generate the token
+     *
+     * @return string
+     */
+    public function generateToken(): string
     {
         if ($this->token != null) {
-            echo "Token already generated and defined in session";
-            return;
+            return json_encode([
+                'code' => 405,
+                'message' => 'Token already generated and defined in session'
+            ]);
         }
 
         // Generate token
@@ -34,13 +41,15 @@ class CSRF
     /**
      * Method to set token on user session
      *
-     * @return void
+     * @return string
      */
-    private function setTokenInSession(): void
+    private function setTokenInSession(): string
     {
         if (isset($_SESSION['csrf_token']) && !empty($_SESSION['csrf_token'])) {
-            echo "Token already defined in session";
-            return;
+            return json_encode([
+                'code' => 405,
+                'message' => 'Token already defined in session'
+            ]);
         }
         $_SESSION['csrf_token'] = $this->token;
     }
@@ -49,23 +58,34 @@ class CSRF
      * Method to validate userform token
      *
      * @param string $token_form
-     * @return void
+     * @return string
      */
-    public function checkToken(string $token_form): void
+    public function checkToken(string $token_form): string
     {
         if (empty($token_form)) {
-            echo "Token não pode estar vazio";
-            return;
+            return json_encode([
+                'code' => 405,
+                'message' => 'Token cannot be empty'
+            ]);
         }
 
         if (!isset($_SESSION['csrf_token']) && empty($_SESSION['csrf_token'])) {
-            echo "You need to generate and set the token first";
-            return;
+            return json_encode([
+                'code' => 405,
+                'message' => 'You need to generate and set the token first'
+            ]);
         }
 
         if ($token_form != $_SESSION['csrf_token']) {
-            echo json_encode(["message" => "Not authorized"]);
-            return;
+            return json_encode([
+                'code' => 405,
+                'message' => 'Not authorized'
+            ]);
         }
+
+        return json_encode([
+            'code' => 200,
+            'message' => 'authorized'
+        ]);
     }
 }
