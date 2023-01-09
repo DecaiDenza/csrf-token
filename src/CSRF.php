@@ -74,7 +74,7 @@ class CSRF
             ]);
         }
 
-        if (!empty($_SESSION['csrf_token'])) {
+        if (empty($_SESSION['csrf_token'])) {
             return json_encode([
                 'code' => 400,
                 'message' => 'You need to generate and set the token first'
