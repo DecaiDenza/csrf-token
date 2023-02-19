@@ -18,5 +18,13 @@
     "php": ">=7.4",
     "ext-json": "*"
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "archive": {
+    "exclude": [
+      "composer.lock",
+      "README.md",
+      ".gitignore",
+      ".idea"
+    ]
+  }
 }
