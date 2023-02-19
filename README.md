@@ -14,7 +14,7 @@ use Codeflow\CSRF;
 
 session_start();
 
-$csrf = new CSRF();
+$csrf = new CSRF(); 
 
 // Generate token for current session $_SESSION['csrf_token']
 $csrf->generateToken(); // return json encoded (error or success)
@@ -41,3 +41,11 @@ $token_form = filter_input(INPUT_POST, '__csrf', FILTER_DEFAULT);
 // If valid, it returns a json with "success", otherwise a json with the error
 $csrf->checkToken($token_form);
 ```
+
+## Changelogs
+
+- Can now change session variable name in class constructor (optional).
+- Added validation for session variable name.
+Validation takes place at the time of class instantiation.
+
+NOTE: The Constructor may throw an exception in case of unsuccessful validation
